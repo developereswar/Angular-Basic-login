@@ -1,0 +1,64 @@
+<div class="jumbotron login_wrapper  min-vh-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4 offset-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Register</h5>
+                        <form #register="ngForm" (ngSubmit)="onSubmit()">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Username</label>
+                                <input type="text" class="form-control" name="username" [(ngModel)]="registerForm.username"
+                                minlength="4" required  #name="ngModel"/>
+                                <div *ngIf="name.invalid && (name.dirty || name.touched)" class="text-danger">
+                                    <div *ngIf="name.errors.required">
+                                        Name is required.
+                                    </div>
+                                    <div *ngIf="name.errors.minlength">
+                                        Name must be at least 4 characters long.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Email</label>
+                                <input type="email" class="form-control" name="email"  [(ngModel)]="registerForm.email"
+                                 required  #email="ngModel"/>
+                                 <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-danger">
+                                    <span *ngIf="email.errors.required">
+                                        Email is required.
+                                    </span>
+                                    <span class="text-danger" *ngIf="email.touched && email.errors?.email">
+                                        Enter a valid email address
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Password</label>
+                                <input type="password" class="form-control" name="password" [(ngModel)]="registerForm.password" required #pass="ngModel"/>
+                                <div *ngIf="pass.invalid && (pass.dirty || pass.touched)" class="text-danger">
+                                    <div *ngIf="pass.errors.required">
+                                        Password is required.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Confirm Password</label>
+                                <input type="password"   class="form-control" name="cpassword" #cpass="ngModel" required [(ngModel)]="registerForm.cpassword"/>
+                                <div *ngIf="cpass.invalid && (cpass.dirty || cpass.touched)" class="text-danger">
+                                    <div *ngIf="cpass.errors.required">
+                                        Password is required.
+                                    </div>
+                                </div>
+                                <div *ngIf="(cpass.dirty || cpass.touched) && pass.value !== cpass.value" class="text-danger">
+                                    Password doesn't match.
+                                </div>
+                            </div>
+                        
+                            <button type="submit" [disabled]="register.invalid" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
